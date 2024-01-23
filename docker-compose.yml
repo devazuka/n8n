@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    restart: always
+    ports:
+      - "127.0.0.1:${PORT}:${PORT}"
+    environment:
+      - GENERIC_TIMEZONE=Europe/Lisbon
+      - N8N_HOST=n8n.devazuka.com
+      - N8N_PORT=${PORT}
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - WEBHOOK_URL=https://n8n.devazuka.com/
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
+    external: true
